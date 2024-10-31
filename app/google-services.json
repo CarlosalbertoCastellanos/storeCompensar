@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "232838244084",
+    "project_id": "my-store-213cc",
+    "storage_bucket": "my-store-213cc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:232838244084:android:b4119f99568bbb4cbd20a1",
+        "android_client_info": {
+          "package_name": "com.compensar.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3vUdjYylCTMAHHyKTUHNYhebNSyeYwQg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

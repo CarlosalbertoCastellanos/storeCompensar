@@ -44,7 +44,9 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.password_login);
         signUp = findViewById(R.id.sign_up);
 
-        signUp.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, RegistrationActivity.class)));
+        signUp.setOnClickListener(v -> {
+            startActivity(new Intent(LoginActivity.this, RegistrationActivity.class));
+        });
 
         signIn.setOnClickListener(v -> {
             progressBar.setVisibility(View.VISIBLE);
@@ -85,7 +87,8 @@ public class LoginActivity extends AppCompatActivity {
         progressBar.setVisibility(View.GONE);
         if (task.isSuccessful()) {
             showToast("Login Successfully");
-            // Navega a la siguiente actividad
+            Intent intent = new Intent(LoginActivity.this, Home.class);
+            startActivity(intent);
         } else {
             showToast("Error: " + task.getException().getMessage());
         }

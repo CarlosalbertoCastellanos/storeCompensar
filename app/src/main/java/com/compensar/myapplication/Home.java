@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -43,6 +44,17 @@ public class Home extends AppCompatActivity {
                 startActivity(new Intent(Home.this, AddProduct.class));
             }
         });
+
+        ImageButton btnUbication=findViewById(R.id.imageButtonUbication);
+        btnUbication.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startActivity(new Intent(Home.this, MapsActivity.class));
+                    }
+                }
+        );
+
         db = new Database(Home.this);
         nameProducts=new ArrayList<>();
         priceProducts=new ArrayList<>();

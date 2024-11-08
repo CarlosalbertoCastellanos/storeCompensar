@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cartMainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="12dp">
+
+    <!-- ID del Carrito (Invisible) -->
+    <TextView
+        android:id="@+id/cart_id"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Cart ID"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Nombre del Producto -->
+    <TextView
+        android:id="@+id/cart_product_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Nombre del Producto"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cart_id"
+        app:layout_constraintEnd_toStartOf="@id/removeFromCartButton"
+        app:layout_constraintHorizontal_bias="0" />
+
+    <!-- Precio del Producto -->
+    <TextView
+        android:id="@+id/cart_product_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="$0"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cart_product_name" />
+
+    <!-- Cantidad del Producto -->
+    <TextView
+        android:id="@+id/cart_quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cantidad: 1"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cart_product_price" />
+
+    <!-- Botón Eliminar del Carrito -->
+    <ImageButton
+        android:id="@+id/removeFromCartButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="Eliminar del Carrito"
+        android:src="@drawable/remove_circle"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,4 +14,7 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_home">Home</string>
+
+    <string name="my_map_apy_key">AIzaSyCzk9NE-t96wRlONYF4GrUm35rpgTTbehw</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>

@@ -7,11 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,34 +22,33 @@ public class CustomAdapterProducts extends RecyclerView.Adapter<CustomAdapterPro
     private Activity activity;
     private ArrayList<String> idProduct, nameProduct, priceProduct;
 
-    // Constructor to initialize the data
-    CustomAdapterProducts( Activity activity, Context context, ArrayList<String> idProduct, ArrayList<String> nameProduct, ArrayList<String> priceProduct) {
-        this.activity=activity;
+    // Constructor para inicializar los datos
+    CustomAdapterProducts(Activity activity, Context context, ArrayList<String> idProduct, ArrayList<String> nameProduct, ArrayList<String> priceProduct) {
+        this.activity = activity;
         this.context = context;
         this.idProduct = idProduct;
         this.nameProduct = nameProduct;
         this.priceProduct = priceProduct;
     }
 
-
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        // Inflating the layout for each row
+        // Inflar el layout para cada fila
         View view = inflater.inflate(R.layout.my_row, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        // Binding data to the view elements
+        // Vincular datos a los elementos de la vista
         holder.textId.setText(idProduct.get(position));
         holder.textTitle.setText(nameProduct.get(position));
-        holder.textPrice.setText(priceProduct.get(position));
+        holder.textPrice.setText("$" + priceProduct.get(position));
 
         holder.editButton.setOnClickListener(v -> {
-            int adapterPosition = holder.getAdapterPosition();  // Get the correct position
+            int adapterPosition = holder.getAdapterPosition();  // Obtener la posición correcta
             if (adapterPosition != RecyclerView.NO_POSITION) {
                 Intent intent = new Intent(context, UpdateProduct.class);
                 intent.putExtra("id", idProduct.get(adapterPosition));
@@ -60,11 +58,27 @@ public class CustomAdapterProducts extends RecyclerView.Adapter<CustomAdapterPro
             }
         });
 
-        // Delete button setup
+        // Botón de eliminar
         holder.deleteButton.setOnClickListener(v -> {
-            int adapterPosition = holder.getAdapterPosition();  // Get the correct position for deletion
+            int adapterPosition = holder.getAdapterPosition();  // Obtener la posición correcta para eliminar
             if (adapterPosition != RecyclerView.NO_POSITION) {
-                removeProduct(adapterPosition);  // Remove the item from the list
+                removeProduct(adapterPosition);  // Eliminar el ítem de la lista
+            }
+        });
+
+        // Botón de Añadir al Carrito
+        holder.addToCartButton.setOnClickListener(v -> {
+            String productId = idProduct.get(position);
+            String productName = nameProduct.get(position);
+            String productPrice = priceProduct.get(position);
+
+            Database db = new Database(context);
+            long result = db.addToCart(productId, productName, Integer.parseInt(productPrice));
+
+            if (result != -1) {
+                Toast.makeText(context, "Añadido al carrito", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(context, "Error al añadir al carrito", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -77,7 +91,7 @@ public class CustomAdapterProducts extends RecyclerView.Adapter<CustomAdapterPro
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView textId, textTitle, textPrice;
         ConstraintLayout mainLayout;
-        ImageButton deleteButton, editButton;
+        ImageButton deleteButton, editButton, addToCartButton;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -85,12 +99,13 @@ public class CustomAdapterProducts extends RecyclerView.Adapter<CustomAdapterPro
             textTitle = itemView.findViewById(R.id.name_product);
             textPrice = itemView.findViewById(R.id.price_product);
             mainLayout = itemView.findViewById(R.id.mainLayout);
-            deleteButton = itemView.findViewById(R.id.deleteProduct);
+            deleteButton = itemView.findViewById(R.id.deleteProduct3);
             editButton = itemView.findViewById(R.id.editProduct);
+            addToCartButton = itemView.findViewById(R.id.addToCart);
         }
     }
 
-    // Method to remove a product from the list
+    // Método para eliminar un producto de la lista
     private void removeProduct(int position) {
         Database db = new Database(context);
         db.deleteProduct(idProduct.get(position));

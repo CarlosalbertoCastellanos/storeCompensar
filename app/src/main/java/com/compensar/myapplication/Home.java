@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,13 +23,12 @@ import java.util.ArrayList;
 
 public class Home extends AppCompatActivity {
 
-    private FloatingActionButton addNewProduct, cartButton;
+    private FloatingActionButton addNewProduct;
     private RecyclerView recyclerView;
 
     Database db;
     ArrayList<String> nameProducts, priceProducts, idProducts;
     CustomAdapterProducts customerAdapterProducts;
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {

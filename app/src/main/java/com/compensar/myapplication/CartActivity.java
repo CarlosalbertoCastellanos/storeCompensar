@@ -1,5 +1,6 @@
 package com.compensar.myapplication;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -48,7 +49,8 @@ public class CartActivity extends AppCompatActivity {
         });
     }
 
-    void storeCartDataInArrays(){
+    void storeCartDataInArrays() {
+        // Limpiar las listas antes de llenarlas
         cartIds.clear();
         cartProductIds.clear();
         cartProductNames.clear();
@@ -56,13 +58,35 @@ public class CartActivity extends AppCompatActivity {
         cartQuantities.clear();
 
         // Obtener los datos del carrito desde la base de datos
-        db.readAllCartItems().moveToFirst();
-        while (db.readAllCartItems().moveToNext()) {
-            cartIds.add(db.readAllCartItems().getString(0));
-            cartProductIds.add(db.readAllCartItems().getString(1));
-            cartProductNames.add(db.readAllCartItems().getString(2));
-            cartProductPrices.add(db.readAllCartItems().getString(3));
-            cartQuantities.add(db.readAllCartItems().getString(4));
+        Cursor cursor = db.readAllCartItems();
+
+        if (cursor != null) {
+            if (cursor.moveToFirst()) { // Mover el cursor a la primera fila
+                do {
+                    // Obtener los datos de cada columna por nombre
+                    String id = cursor.getString(cursor.getColumnIndexOrThrow("cart_id"));
+                    String productId = cursor.getString(cursor.getColumnIndexOrThrow("product_id"));
+                    String name = cursor.getString(cursor.getColumnIndexOrThrow("product_name"));
+                    String price = cursor.getString(cursor.getColumnIndexOrThrow("product_price"));
+                    String quantity = cursor.getString(cursor.getColumnIndexOrThrow("quantity"));
+
+                    // Añadir los datos a las listas correspondientes
+                    cartIds.add(id);
+                    cartProductIds.add(productId);
+                    cartProductNames.add(name);
+                    cartProductPrices.add(price);
+                    cartQuantities.add(quantity);
+                } while (cursor.moveToNext()); // Mover a la siguiente fila
+            } else {
+                // El cursor está vacío
+                Toast.makeText(this, "No hay datos en el carrito", Toast.LENGTH_SHORT).show();
+            }
+
+            // Cerrar el cursor para liberar recursos
+            cursor.close();
+        } else {
+            // El cursor es nulo
+            Toast.makeText(this, "Error al obtener datos del carrito", Toast.LENGTH_SHORT).show();
         }
     }
 }

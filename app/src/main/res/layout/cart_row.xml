@@ -1,64 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cartMainLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="12dp">
+    android:padding="12dp"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="8dp"
+    android:layout_marginVertical="8dp"
+    android:backgroundTint="#FFFFFF">
 
-    <!-- ID del Carrito (Invisible) -->
-    <TextView
-        android:id="@+id/cart_id"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Cart ID"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <!-- Nombre del Producto -->
-    <TextView
-        android:id="@+id/cart_product_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Nombre del Producto"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cart_id"
-        app:layout_constraintEnd_toStartOf="@id/removeFromCartButton"
-        app:layout_constraintHorizontal_bias="0" />
+        <!-- ID del Carrito (Invisible) -->
+        <TextView
+            android:id="@+id/cart_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Cart ID"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Precio del Producto -->
-    <TextView
-        android:id="@+id/cart_product_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="$0"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cart_product_name" />
+        <!-- Nombre del Producto -->
+        <TextView
+            android:id="@+id/cart_product_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Nombre del Producto"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cart_id"
+            app:layout_constraintEnd_toStartOf="@id/removeFromCartButton"
+            android:layout_marginEnd="8dp" />
 
-    <!-- Cantidad del Producto -->
-    <TextView
-        android:id="@+id/cart_quantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cantidad: 1"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cart_product_price" />
+        <!-- Botón Eliminar del Carrito -->
+        <ImageButton
+            android:id="@+id/removeFromCartButton"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:contentDescription="Eliminar del Carrito"
+            android:src="@android:drawable/ic_menu_delete"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/cart_product_name" />
 
-    <!-- Botón Eliminar del Carrito -->
-    <ImageButton
-        android:id="@+id/removeFromCartButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:contentDescription="Eliminar del Carrito"
-        android:src="@drawable/remove_circle"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <!-- Precio del Producto -->
+        <TextView
+            android:id="@+id/cart_product_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$0"
+            android:textSize="16sp"
+            android:textColor="#4CAF50"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cart_product_name" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Cantidad del Producto -->
+        <TextView
+            android:id="@+id/cart_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cantidad: 1"
+            android:textSize="16sp"
+            android:textColor="#333333"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cart_product_price" />
+
+        <!-- Botón Aumentar Cantidad -->
+        <ImageButton
+            android:id="@+id/increaseQuantityButton"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:contentDescription="Aumentar Cantidad"
+            android:src="@android:drawable/ic_input_add"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:layout_constraintStart_toEndOf="@id/cart_quantity"
+            app:layout_constraintTop_toTopOf="@id/cart_quantity"
+            android:layout_marginStart="8dp" />
+
+        <!-- Botón Disminuir Cantidad -->
+        <ImageButton
+            android:id="@+id/decreaseQuantityButton"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:contentDescription="Disminuir Cantidad"
+            android:src="@android:drawable/ic_delete"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:layout_constraintStart_toEndOf="@id/increaseQuantityButton"
+            app:layout_constraintTop_toTopOf="@id/cart_quantity"
+            android:layout_marginStart="8dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
